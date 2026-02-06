@@ -3,184 +3,213 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Will You Be My Valentine?</title>
+  <title>Rimuru & Ciel – Valentine Contract</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #7dd3fc, #1e3a8a);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: url('https://images.alphacoders.com/121/1219367.jpg') center/cover fixed;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #e0f2fe;
-    }
-
-    .card {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      position: relative;
       overflow: hidden;
     }
 
-    .card::before {
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(56,189,248,0.6), rgba(2,6,23,0.9));
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: rgba(2,6,23,0.85);
+      border-radius: 26px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 92%;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(56,189,248,0.4);
+      overflow: hidden;
+    }
+
+    .card::after {
       content: "";
       position: absolute;
       inset: -50%;
-      background: conic-gradient(from 0deg, transparent, rgba(125,211,252,0.4), transparent 30%);
-      animation: spin 6s linear infinite;
+      background: conic-gradient(from 0deg, transparent, rgba(56,189,248,0.35), transparent 30%);
+      animation: spin 8s linear infinite;
     }
 
     .card > * { position: relative; z-index: 1; }
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    h1 { font-size: 1.9rem; margin-bottom: 0.3rem; }
 
-    .subtitle { font-size: 1rem; opacity: 0.85; margin-bottom: 1.5rem; }
-
-    .slime {
-      width: 120px; height: 120px; margin: 0 auto 1.5rem;
-      background: radial-gradient(circle at top, #bae6fd, #38bdf8);
-      border-radius: 50% 50% 45% 45%; position: relative;
-      animation: bounce 2.5s ease-in-out infinite;
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-bottom: 1.2rem;
     }
 
-    .slime::before, .slime::after {
-      content: ""; position: absolute; top: 40px; width: 14px; height: 14px;
-      background: #0f172a; border-radius: 50%;
+    .characters {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
     }
 
-    .slime::before { left: 35px; }
-    .slime::after { right: 35px; }
-
-    .mouth {
-      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-      width: 30px; height: 14px; border-bottom: 3px solid #0f172a;
-      border-radius: 0 0 50px 50px;
+    .characters img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 2px solid rgba(56,189,248,0.6);
+      box-shadow: 0 0 15px rgba(56,189,248,0.5);
     }
 
-    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
+    p {
+      font-size: 1rem;
+      line-height: 1.55;
+      margin-bottom: 1.8rem;
+    }
 
-    p { font-size: 1rem; line-height: 1.5; margin-bottom: 1.8rem; }
-
-    .buttons { display: flex; gap: 1rem; justify-content: center; position: relative; }
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      position: relative;
+    }
 
     button {
-      padding: 0.7rem 1.4rem; font-size: 1rem; border-radius: 999px;
-      border: none; cursor: pointer;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
       position: relative;
     }
 
     .yes {
       background: linear-gradient(135deg, #22d3ee, #38bdf8);
-      color: #0f172a; font-weight: bold;
-      box-shadow: 0 10px 20px rgba(56,189,248,0.4);
+      color: #020617;
+      font-weight: bold;
+      box-shadow: 0 0 25px rgba(56,189,248,0.6);
     }
 
     .no {
-      background: transparent; color: #bae6fd; border: 2px solid #38bdf8;
-    }
-
-    button:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.4);
+      background: transparent;
+      color: #bae6fd;
+      border: 2px solid #38bdf8;
     }
 
     .attack {
-      animation: dash 0.35s ease forwards;
+      animation: dash 0.4s ease forwards;
     }
 
     @keyframes dash {
-      0% { transform: translateX(0) scale(1); filter: drop-shadow(0 0 0px #22d3ee); }
-      40% { transform: translateX(60px) scale(1.2); filter: drop-shadow(0 0 12px #22d3ee); }
-      70% { transform: translateX(120px) scale(1.35) rotate(5deg); filter: drop-shadow(0 0 25px #38bdf8); }
-      100% { transform: translateX(100px) scale(1.1); filter: drop-shadow(0 0 18px #22d3ee); }
-    }
-      70% { transform: translateX(110px) scale(1.15); }
-      100% { transform: translateX(90px) scale(1); }
+      0% { transform: translateX(0) scale(1); filter: drop-shadow(0 0 0px #38bdf8); }
+      40% { transform: translateX(60px) scale(1.2); filter: drop-shadow(0 0 14px #38bdf8); }
+      70% { transform: translateX(130px) scale(1.35) rotate(6deg); filter: drop-shadow(0 0 28px #22d3ee); }
+      100% { transform: translateX(110px) scale(1.1); filter: drop-shadow(0 0 18px #38bdf8); }
     }
 
     .hit {
-      animation: explode 0.4s ease forwards;
+      animation: explode 0.45s ease forwards;
     }
 
     @keyframes explode {
-      0% { transform: scale(1); opacity: 1; filter: blur(0); }
-      40% { transform: scale(1.4) rotate(12deg); filter: blur(1px); }
-      70% { transform: scale(0.8) rotate(-15deg); filter: blur(3px); }
-      100% { transform: scale(0); opacity: 0; filter: blur(6px); }
-    }
-      60% { transform: scale(1.2) rotate(10deg); }
+      0% { transform: scale(1); opacity: 1; }
+      40% { transform: scale(1.4) rotate(12deg); }
+      70% { transform: scale(0.7) rotate(-18deg); }
       100% { transform: scale(0); opacity: 0; }
     }
 
-    .response { margin-top: 1.5rem; font-size: 1.1rem; display: none; }
+    .final {
+      display: none;
+      margin-top: 1.6rem;
+      font-size: 1.1rem;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .seal {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
   </style>
 </head>
+
 <body>
   <div class="card">
-    <div class="slime">
-      <div class="mouth"></div>
+    <h1>Rimuru 💙</h1>
+    <div class="subtitle">Proposing a Valentine Contract</div>
+
+    <div class="characters">
+      <img src="https://static.zerochan.net/Rimuru.Tempest.full.3057771.jpg" alt="Rimuru">
+      <img src="https://static.zerochan.net/Ciel.%28Tensei.Shitara.Slime.Datta.Ken%29.full.3470668.jpg" alt="Ciel">
     </div>
 
-    <h1>From Rimuru 💙</h1>
-    <div class="subtitle">To the one I trust with my core</div>
-
     <p>
-      In every world, every timeline, and every battle — I choose you.
-      Will you be the <strong>Ciel</strong> to my <strong>Rimuru</strong>, my partner,
-      my strategist, and my Valentine?
+      Across every timeline and every world, there is only one partner I trust.
+      Will you be the <strong>Ciel</strong> to my <strong>Rimuru</strong> — my strategist,
+      my equal, and my Valentine?
     </p>
 
     <div class="buttons">
-      <button id="yesBtn" class="yes" onclick="sayYes()">Yes, Partner 🌸</button>
-      <button id="noBtn" class="no" onclick="sayNo()">No 😅</button>
+      <button id="yesBtn" class="yes">Yes, my partner 🌸</button>
+      <button id="noBtn" class="no">No 😅</button>
     </div>
 
-    <div id="response" class="response"></div>
+    <div id="final" class="final"></div>
   </div>
 
   <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
+    document.addEventListener('DOMContentLoaded', () => {
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      const final = document.getElementById('final');
 
-    function sayYes() {
-      const r = document.getElementById('response');
-      r.style.display = 'block';
-      r.innerHTML = "💖 Contract accepted. From this moment on, we face the world together. Happy Valentine’s Day, my Ciel.";
-    }
+      yesBtn.addEventListener('click', () => {
+        final.style.display = 'block';
+        final.innerHTML = `💖 <strong>Contract Accepted.</strong><br><br>
+          From this moment forward, our fates are linked.<br>
+          Strategy synchronized. Hearts aligned.<br><br>
+          <em>Happy Valentine’s Day, my Ciel.</em>
+          <div class="seal">🔒 Status: Eternal Partners</div>`;
+      });
 
-    function sayNo() {
-      // Ultimate Skill: Raphael 👁️
-      yesBtn.classList.remove('attack');
-      void yesBtn.offsetWidth; // reset animation
-      yesBtn.classList.add('attack');
+      noBtn.addEventListener('click', () => {
+        yesBtn.classList.remove('attack');
+        void yesBtn.offsetWidth;
+        yesBtn.classList.add('attack');
 
-      setTimeout(() => {
-        noBtn.classList.add('hit');
-      }, 180);
+        setTimeout(() => {
+          noBtn.classList.add('hit');
+        }, 180);
 
-      const r = document.getElementById('response');
-      setTimeout(() => {
-        r.style.display = 'block';
-        r.innerHTML = "👁️ Ultimate Skill Activated: Raphael. Probability of rejection reduced to 0%. Valentine contract enforced.";
-      }, 500);
-    }, 200);
-
-      const r = document.getElementById('response');
-      setTimeout(() => {
-        r.style.display = 'block';
-        r.innerHTML = "⚔️ Negative outcome eliminated. Only one future remains.";
-      }, 450);
-    }
+        setTimeout(() => {
+          final.style.display = 'block';
+          final.innerHTML = '👁️ Ultimate Skill Activated: Raphael.<br>Rejection timeline eliminated.';
+        }, 550);
+      });
+    });
   </script>
 </body>
 </html>
